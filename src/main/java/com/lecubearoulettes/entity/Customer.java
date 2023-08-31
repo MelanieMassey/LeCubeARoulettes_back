@@ -1,20 +1,18 @@
 package com.lecubearoulettes.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "customers")
 public class Customer extends Person {
 
-
     private String phone;
     private Date birthdate;
 //    @Enumerated(EnumType.STRING)
-//    private Address address;
+//    @ManyToOne
+    @Embedded
+    private Address address;
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -28,13 +26,13 @@ public class Customer extends Person {
         this.role = role;
     }
 
-//    public Customer(String firstName, String lastName, Title title, String email, String phone, Date birthdate, Address address, Role role) {
-//        super(firstName, lastName, title, email);
-//        this.phone = phone;
-//        this.birthdate = birthdate;
-//        this.address = address;
-//        this.role = role;
-//    }
+    public Customer(String firstName, String lastName, Title title, String email, String phone, Date birthdate, Address address, Role role) {
+        super(firstName, lastName, title, email);
+        this.phone = phone;
+        this.birthdate = birthdate;
+        this.address = address;
+        this.role = role;
+    }
 
     public String getPhone() {
         return phone;
@@ -44,9 +42,9 @@ public class Customer extends Person {
         return birthdate;
     }
 
-//    public Address getAddress() {
-//        return address;
-//    }
+    public Address getAddress() {
+        return address;
+    }
 
     public Role getRole() {
         return role;
