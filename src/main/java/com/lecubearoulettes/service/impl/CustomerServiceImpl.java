@@ -71,6 +71,16 @@ public class CustomerServiceImpl implements CustomerService {
         else throw new CustomerException("Customer not found for this id: " + id);
     }
 
+    @Override
+    public Customer updateCustomer(Customer customerJson) {
+        Customer existingCustomer = customerDao.findById(customerJson.getId()).orElseThrow( () -> new CustomerException("Customer not found for this id: " + customerJson.getId()));
+
+        // Si existingCustomer, alors pas d'exception renvoyée donc le code continue
+        Customer updatedCustomer = customerDao.save(customerJson);
+
+        return updatedCustomer;
+    }
+
     @Autowired
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;

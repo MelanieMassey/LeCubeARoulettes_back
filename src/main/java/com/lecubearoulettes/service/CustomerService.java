@@ -12,6 +12,6 @@ public interface CustomerService {
     Customer createCustomerWithDto(CustomerDto customerDto);
     Customer createCustomerWithJSon(Customer customerJson);
     Customer deleteCustomer(Long id);
-//    Customer updateCustomer(Long id, )
+    Customer updateCustomer(Customer customerJson);
 
 }

@@ -51,6 +51,12 @@ public class CustomerController {
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
+    @PutMapping("/customers")
+    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customerJson){
+        Customer updatedCustomer = customerService.updateCustomer(customerJson);
+        return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
+    }
+
     // Injection par Setter du service = implémentation du Service qui est à la base une interface.
     @Autowired
     public void setCustomerService(CustomerService customerService) {
