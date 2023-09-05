@@ -26,13 +26,13 @@ public class CustomerController {
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
-    @PostMapping("/customers")
+    @PostMapping("/customers/dto")
     public ResponseEntity<Customer> createCustomerWithDto(@RequestBody CustomerDto customerDto){
         Customer createdProduct = customerService.createCustomerWithDto(customerDto);
         return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }
 
-    @PostMapping("/customers/json")
+    @PostMapping("/customers")
     public ResponseEntity<Customer> createCustomerWithJson(@RequestBody Customer customerJson){
         Customer createdCustomer = customerService.createCustomerWithJSon(customerJson);
         return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
