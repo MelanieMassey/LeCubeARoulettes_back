@@ -1,18 +1,11 @@
 package com.lecubearoulettes.controller;
-
-import com.lecubearoulettes.entity.Address;
 import com.lecubearoulettes.entity.Customer;
-import com.lecubearoulettes.entity.Role;
-import com.lecubearoulettes.entity.Title;
 import com.lecubearoulettes.entity.dto.CustomerDto;
 import com.lecubearoulettes.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

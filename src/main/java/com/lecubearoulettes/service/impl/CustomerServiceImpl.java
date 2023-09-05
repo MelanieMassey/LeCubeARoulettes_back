@@ -2,16 +2,12 @@ package com.lecubearoulettes.service.impl;
 
 import com.lecubearoulettes.entity.Address;
 import com.lecubearoulettes.entity.Customer;
-import com.lecubearoulettes.entity.Role;
-import com.lecubearoulettes.entity.Title;
 import com.lecubearoulettes.entity.dto.CustomerDto;
 import com.lecubearoulettes.exception.CustomerException;
 import com.lecubearoulettes.repository.CustomerDao;
 import com.lecubearoulettes.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,6 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
         return updatedCustomer;
     }
 
+    // SETTER DAO - injection
     @Autowired
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
