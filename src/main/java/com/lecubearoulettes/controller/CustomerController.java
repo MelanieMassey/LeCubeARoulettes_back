@@ -16,25 +16,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-//@RequestMapping("api/customers")
 public class CustomerController {
 
     CustomerService customerService;
 
-//    @GetMapping("customers")
-//    public ResponseEntity<List<Customer>> findAllCustomers() {
-//        List<Customer> allCustomers = customerService.findAllCustomers();
-//        return new ResponseEntity<>(allCustomers, HttpStatus.OK);
-//    }
-
-    @GetMapping("customers")
-    public List<Customer> findAllCustomers() {
-        return customerService.findAllCustomers();
+    // ResponseEntity apporte des informations complémentaires en cas d'erreurs
+    @GetMapping("/customers")
+    public ResponseEntity<List<Customer>> findAllCustomers() {
+        List<Customer> allCustomers = customerService.findAllCustomers();
+        return new ResponseEntity<>(allCustomers, HttpStatus.OK);
     }
 
-    @GetMapping("customers/{id}")
-    public Customer findCustomerById(Long id){
-        return customerService.findCustomerById(id);
+    @GetMapping("/customers/{id}")
+    public ResponseEntity<Customer> findCustomerById(@PathVariable Long id){
+        Customer customer = customerService.findCustomerById(id);
+        return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
 //    @PostMapping("/customers")

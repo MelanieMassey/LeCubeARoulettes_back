@@ -5,12 +5,14 @@ import com.lecubearoulettes.entity.Customer;
 import com.lecubearoulettes.entity.Role;
 import com.lecubearoulettes.entity.Title;
 import com.lecubearoulettes.entity.dto.CustomerDto;
+import com.lecubearoulettes.exception.CustomerException;
 import com.lecubearoulettes.repository.CustomerDao;
 import com.lecubearoulettes.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -25,7 +27,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer findCustomerById(Long id) {
-        return customerDao.findById(id).get();
+        Optional<Customer> optional = customerDao.findById(id);
+        if(optional.isPresent()) return optional.get();
+        else throw new CustomerException("Customer not found with given Id: " + id);
     }
 
 //    @Override
