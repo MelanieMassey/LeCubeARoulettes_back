@@ -6,6 +6,9 @@ INSERT INTO `lecar_db`.`person` (`person_type`, `id`, `email`, `first_name`, `la
 INSERT INTO `lecar_db`.`person` (`person_type`, `id`, `email`, `first_name`, `last_name`, `title`) VALUES ('EventLeader', 9, 'lorene.l@gmail.com', 'Lorene', 'Lebonnec', 'MADEMOISELLE');
 INSERT INTO `lecar_db`.`person` (`person_type`, `id`, `email`, `first_name`, `last_name`, `title`) VALUES ('EventLeader', 10, 'xavier.c@gmail.com', 'Xavier', 'Caroulle', 'MONSIEUR');
 INSERT INTO `lecar_db`.`person` (`person_type`, `id`, `email`, `first_name`, `last_name`, `title`) VALUES ('EventLeader', 11, 'celine.m@gmail.com', 'Céline', 'Mangeant', 'MADAME');
+INSERT INTO `lecar_db`.`person` (`person_type`, `id`, `email`, `first_name`, `last_name`, `title`) VALUES ('Attendee', 12, 'elisabeth.w@gmail.com', 'Marius', 'Weil', 'MONSIEUR');
+INSERT INTO `lecar_db`.`person` (`person_type`, `id`, `email`, `first_name`, `last_name`, `title`) VALUES ('Attendee', 13, 'elisabeth.w@gmail.com', 'Aria', 'Weil', 'MADEMOISELLE');
+INSERT INTO `lecar_db`.`person` (`person_type`, `id`, `email`, `first_name`, `last_name`, `title`) VALUES ('Attendee', 14, 'elisabeth.w@gmail.com', 'Lysandre', 'Weil', 'MONSIEUR');
 
 INSERT INTO `lecar_db`.`customer` (`address_city`, `address_street_name`, `address_street_number`, `address_street_type`, `address_zip_code`, `birthdate`, `phone`, `role`, `id`) VALUES ('Toulouse', 'du Soleil', 10, 'rue', '31000', '1984-03-31', '0631313131', 'CUSTOMER', 1);
 INSERT INTO `lecar_db`.`customer` (`address_city`, `address_street_name`, `address_street_number`, `address_street_type`, `address_zip_code`, `birthdate`, `phone`, `role`, `id`) VALUES ('Blagnac', 'du Paradis', 9, 'avenue', '31720', '2008-07-14', '0632323232', 'CUSTOMER', 2);
@@ -17,3 +20,7 @@ INSERT INTO `lecar_db`.`event_leader` (`company_name`, `job_title`, `phone`, `id
 INSERT INTO `lecar_db`.`event_leader` (`company_name`, `job_title`, `phone`, `id`) VALUES ('Sodexo', 'Audit Group SVP', '0678787878', 9);
 INSERT INTO `lecar_db`.`event_leader` (`company_name`, `job_title`, `phone`, `id`) VALUES ('Sodexo', 'CIO Group SVP', '0678780000', 10);
 INSERT INTO `lecar_db`.`event_leader` (`company_name`, `job_title`, `phone`, `id`) VALUES ('David Jones', 'CEO Senior Executive Assistant', '0678787878', 11);
+
+INSERT INTO `lecar_db`.`attendee` (`birthdate`, `id`) VALUES ('2012-06-05', 12);
+INSERT INTO `lecar_db`.`attendee` (`birthdate`, `id`) VALUES ('2015-03-05', 13);
+INSERT INTO `lecar_db`.`attendee` (`birthdate`, `id`) VALUES ('2018-09-05', 14);
