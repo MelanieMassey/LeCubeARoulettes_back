@@ -1,10 +1,7 @@
 package com.lecubearoulettes.service.impl;
-
-import com.lecubearoulettes.entity.Address;
-import com.lecubearoulettes.entity.Customer;
 import com.lecubearoulettes.entity.EventLeader;
-import com.lecubearoulettes.entity.dto.CustomerDto;
 import com.lecubearoulettes.exception.CustomerException;
+import com.lecubearoulettes.exception.EventLeaderException;
 import com.lecubearoulettes.repository.EventLeaderDao;
 import com.lecubearoulettes.service.EventLeaderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +24,7 @@ public class EventLeaderServiceImpl implements EventLeaderService {
     public EventLeader findEventLeaderById(Long id) {
         Optional<EventLeader> optional = eventLeaderDao.findById(id);
         if(optional.isPresent()) return optional.get();
-        else throw new CustomerException("EventLeader not found with given Id: " + id);
+        else throw new EventLeaderException("EventLeader not found with given Id: " + id);
     }
 
 
@@ -46,7 +43,7 @@ public class EventLeaderServiceImpl implements EventLeaderService {
             eventLeaderDao.delete(eventLeader);
             return eventLeader;
         }
-        else throw new CustomerException("Customer not found for this id: " + id);
+        else throw new EventLeaderException("Event Leader not found for this id: " + id);
     }
 
     @Override
