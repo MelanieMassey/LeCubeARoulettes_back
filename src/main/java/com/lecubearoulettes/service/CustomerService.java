@@ -9,6 +9,9 @@ import java.util.List;
 public interface CustomerService {
     List<Customer> findAllCustomers();
     Customer findCustomerById(Long id);
+    Customer createCustomerWithDto(CustomerDto customerDto);
+    Customer createCustomerWithJSon(Customer customerJson);
+    Customer deleteCustomer(Long id);
+//    Customer updateCustomer(Long id, )
 
-//    Customer createCustomer(CustomerDto customerDto);
 }

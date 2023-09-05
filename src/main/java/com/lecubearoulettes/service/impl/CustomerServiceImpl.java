@@ -11,6 +11,7 @@ import com.lecubearoulettes.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,25 +33,43 @@ public class CustomerServiceImpl implements CustomerService {
         else throw new CustomerException("Customer not found with given Id: " + id);
     }
 
-//    @Override
-//    public Customer createCustomer(CustomerDto customerDto) {
-//        Address address = new Address(customerDto.getStreetNumber(),
-//                customerDto.getStreetType(),
-//                customerDto.getStreetName(),
-//                customerDto.getAddressMoreInfo(),
-//                customerDto.getZipCode(),
-//                customerDto.getCity());
-//        Customer customer = new Customer(customerDto.getFirstName(),
-//                customerDto.getLastName(),
-//                customerDto.getTitle(),
-//                customerDto.getEmail(),
-//                customerDto.getPhone(),
-//                customerDto.getBirthdate(),
-//                address,
-//                customerDto.getRole());
-//        customer = customerDao.save(customer);
-//        return customer;
-//    }
+    @Override
+    public Customer createCustomerWithDto(CustomerDto customerDto) {
+        Address address = new Address(customerDto.getStreetNumber(),
+                customerDto.getStreetType(),
+                customerDto.getStreetName(),
+                customerDto.getAddressMoreInfo(),
+                customerDto.getZipCode(),
+                customerDto.getCity());
+        Customer customer = new Customer(customerDto.getFirstName(),
+                customerDto.getLastName(),
+                customerDto.getTitle(),
+                customerDto.getEmail(),
+                customerDto.getPhone(),
+                customerDto.getBirthdate(),
+                address,
+                customerDto.getRole());
+        customer = customerDao.save(customer);
+        return customer;
+    }
+
+    @Override
+    public Customer createCustomerWithJSon(Customer customerJson) {
+        Customer createdCustomer = customerDao.save(customerJson);
+        return createdCustomer;
+    }
+
+    @Override
+    public Customer deleteCustomer(Long id) {
+        Optional<Customer> optionalCustomer = customerDao.findById(id);
+
+        if (optionalCustomer.isPresent()){
+            Customer customer = optionalCustomer.get();
+            customerDao.delete(customer);
+            return customer;
+        }
+        else throw new CustomerException("Customer not found for this id: " + id);
+    }
 
     @Autowired
     public void setCustomerDao(CustomerDao customerDao) {

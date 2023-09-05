@@ -33,11 +33,25 @@ public class CustomerController {
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
-//    @PostMapping("/customers")
-//    public Customer createCustomer(@RequestBody CustomerDto customerDto){
-//        return customerService.createCustomer(customerDto);
-//    }
+    @PostMapping("/customers")
+    public ResponseEntity<Customer> createCustomerWithDto(@RequestBody CustomerDto customerDto){
+        Customer createdProduct = customerService.createCustomerWithDto(customerDto);
+        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
+    }
 
+    @PostMapping("/customers/json")
+    public ResponseEntity<Customer> createCustomerWithJson(@RequestBody Customer customerJson){
+        Customer createdCustomer = customerService.createCustomerWithJSon(customerJson);
+        return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/customers/{id}")
+    public ResponseEntity<Customer> deleteCustomerById(@PathVariable Long id){
+        Customer customer = customerService.deleteCustomer(id);
+        return new ResponseEntity<>(customer, HttpStatus.OK);
+    }
+
+    // Injection par Setter du service = implémentation du Service qui est à la base une interface.
     @Autowired
     public void setCustomerService(CustomerService customerService) {
         this.customerService = customerService;
