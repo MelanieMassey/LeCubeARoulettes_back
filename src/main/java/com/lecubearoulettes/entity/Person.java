@@ -4,12 +4,12 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(
-        name = "persons",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "email_unique", columnNames = "email")
-        }
-)
+@DiscriminatorColumn(name="person_type")
+//@Table(
+//        uniqueConstraints = {
+//                @UniqueConstraint(name = "email_unique", columnNames = "email")
+//        }
+//)
 public abstract class Person {
 
     @Id
@@ -66,4 +66,23 @@ public abstract class Person {
         return email;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setTitle(Title title) {
+        this.title = title;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

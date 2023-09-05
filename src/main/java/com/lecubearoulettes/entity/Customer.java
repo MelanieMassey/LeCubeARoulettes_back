@@ -1,16 +1,18 @@
 package com.lecubearoulettes.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Table(name = "customers")
 public class Customer extends Person {
 
     private String phone;
-    private Date birthdate;
-//    @Enumerated(EnumType.STRING)
-//    @ManyToOne
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate birthdate;
+
     @Embedded
     private Address address;
     @Enumerated(EnumType.STRING)
@@ -19,14 +21,14 @@ public class Customer extends Person {
     public Customer() {
     }
 
-    public Customer(String firstName, String lastName, Title title, String email, String phone, Date birthdate, Role role) {
+    public Customer(String firstName, String lastName, Title title, String email, String phone, LocalDate birthdate, Role role) {
         super(firstName, lastName, title, email);
         this.phone = phone;
         this.birthdate = birthdate;
         this.role = role;
     }
 
-    public Customer(String firstName, String lastName, Title title, String email, String phone, Date birthdate, Address address, Role role) {
+    public Customer(String firstName, String lastName, Title title, String email, String phone, LocalDate birthdate, Address address, Role role) {
         super(firstName, lastName, title, email);
         this.phone = phone;
         this.birthdate = birthdate;
@@ -38,7 +40,7 @@ public class Customer extends Person {
         return phone;
     }
 
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 
@@ -49,6 +51,5 @@ public class Customer extends Person {
     public Role getRole() {
         return role;
     }
-
 
 }
