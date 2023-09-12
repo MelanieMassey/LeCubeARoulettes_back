@@ -8,21 +8,21 @@ import javax.persistence.Enumerated;
 public class Admin extends Person{
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private RoleEnum role;
 
     public Admin() {
     }
 
-    public Admin(Role role) {
+    public Admin(RoleEnum role) {
         this.role = role;
     }
 
     // GETTERS & SETTERS
-    public Role getRole() {
+    public RoleEnum getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(RoleEnum role) {
         this.role = role;
     }
 }

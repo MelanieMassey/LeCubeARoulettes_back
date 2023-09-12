@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class Customer extends Person {
@@ -16,19 +15,19 @@ public class Customer extends Person {
     @Embedded
     private Address address;
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private RoleEnum role;
 
     public Customer() {
     }
 
-    public Customer(String firstName, String lastName, Title title, String email, String phone, LocalDate birthdate, Role role) {
+    public Customer(String firstName, String lastName, Title title, String email, String phone, LocalDate birthdate, RoleEnum role) {
         super(firstName, lastName, title, email);
         this.phone = phone;
         this.birthdate = birthdate;
         this.role = role;
     }
 
-    public Customer(String firstName, String lastName, Title title, String email, String phone, LocalDate birthdate, Address address, Role role) {
+    public Customer(String firstName, String lastName, Title title, String email, String phone, LocalDate birthdate, Address address, RoleEnum role) {
         super(firstName, lastName, title, email);
         this.phone = phone;
         this.birthdate = birthdate;
@@ -48,7 +47,7 @@ public class Customer extends Person {
         return address;
     }
 
-    public Role getRole() {
+    public RoleEnum getRole() {
         return role;
     }
 

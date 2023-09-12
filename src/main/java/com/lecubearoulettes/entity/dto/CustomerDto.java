@@ -1,16 +1,10 @@
 package com.lecubearoulettes.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.lecubearoulettes.entity.Address;
-import com.lecubearoulettes.entity.Role;
+import com.lecubearoulettes.entity.RoleEnum;
 import com.lecubearoulettes.entity.Title;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class CustomerDto {
 
@@ -21,7 +15,7 @@ public class CustomerDto {
     private String phone;
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate birthdate;
-    private Role role;
+    private RoleEnum role;
     private Integer streetNumber;
     private String streetType;
     private String streetName;
@@ -53,7 +47,7 @@ public class CustomerDto {
         return birthdate;
     }
 
-    public Role getRole() {
+    public RoleEnum getRole() {
         return role;
     }
 

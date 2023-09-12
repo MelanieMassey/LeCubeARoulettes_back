@@ -24,3 +24,5 @@ INSERT INTO `lecar_db`.`event_leader` (`company_name`, `job_title`, `phone`, `id
 INSERT INTO `lecar_db`.`attendee` (`birthdate`, `id`) VALUES ('2012-06-05', 12);
 INSERT INTO `lecar_db`.`attendee` (`birthdate`, `id`) VALUES ('2015-03-05', 13);
 INSERT INTO `lecar_db`.`attendee` (`birthdate`, `id`) VALUES ('2018-09-05', 14);
+
+INSERT INTO `roles` (`id`, `name`) VALUES ('1', 'ADMIN'), ('2', 'USER');
