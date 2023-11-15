@@ -1,14 +1,15 @@
 package com.lecubearoulettes.controller;
 
-
-import com.lecubearoulettes.entity.Role;
+import com.lecubearoulettes.entity.RoleEntity;
 import com.lecubearoulettes.entity.UserEntity;
 import com.lecubearoulettes.entity.dto.AuthResponseDto;
 import com.lecubearoulettes.entity.dto.LoginDto;
 import com.lecubearoulettes.entity.dto.RegisterDto;
 import com.lecubearoulettes.repository.RoleRepository;
 import com.lecubearoulettes.repository.UserRepository;
+//import com.lecubearoulettes.security.JWTGenerator;
 import com.lecubearoulettes.security.JWTGenerator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +28,16 @@ import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
 public class AuthController {
+
 
     private AuthenticationManager authenticationManager;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
     private JWTGenerator jwtGenerator;
-
+//
     @Autowired
     public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository,
                           RoleRepository roleRepository, PasswordEncoder passwordEncoder, JWTGenerator jwtGenerator) {
@@ -44,31 +47,34 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
         this.jwtGenerator = jwtGenerator;
     }
-
+//
     @PostMapping("login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto){
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginDto.getUsername(),
+                        loginDto.getEmail(),
                         loginDto.getPassword()));
+        // Stockage de notre objet authentication dans le context
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        // Génère le token
         String token = jwtGenerator.generateToken(authentication);
         return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);
     }
+//
 
-    @Transactional
     @PostMapping("register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
 
-        if (userRepository.existsByUsername(registerDto.getUsername())) {
+        if (userRepository.existsByEmail(registerDto.getEmail())) {
             return new ResponseEntity<>("Username is taken!", HttpStatus.BAD_REQUEST);
         }
 
         UserEntity user = new UserEntity();
-        user.setUsername(registerDto.getUsername());
+        user.setEmail(registerDto.getEmail());
         user.setPassword(passwordEncoder.encode((registerDto.getPassword())));
 
-        Role roles = roleRepository.findByName("USER").get();
+        RoleEntity roles = roleRepository.findByRolename("USER").get();
         user.setRoles(Collections.singletonList(roles));
 
         userRepository.save(user);

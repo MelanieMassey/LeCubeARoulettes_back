@@ -1,6 +1,6 @@
 package com.lecubearoulettes.entity;
 
-import com.lecubearoulettes.entity.Customer;
+//import com.lecubearoulettes.entity.Customer;
 
 import javax.persistence.*;
 import java.util.ArrayList;

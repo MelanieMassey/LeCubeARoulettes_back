@@ -19,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity // Informe à Spring Boot que la configuration de sécurité se passe ici
 public class SecurityConfig {
 
     private JwtAuthEntryPoint authEntryPoint;
@@ -56,6 +56,7 @@ public class SecurityConfig {
     }
 
     @Bean
+    // On lui dit quel encodeur utiliser
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

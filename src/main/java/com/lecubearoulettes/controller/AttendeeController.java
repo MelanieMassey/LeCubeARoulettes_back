@@ -1,6 +1,5 @@
 package com.lecubearoulettes.controller;
 
-import com.lecubearoulettes.entity.Admin;
 import com.lecubearoulettes.entity.Attendee;
 import com.lecubearoulettes.service.AttendeeService;
 import org.springframework.beans.factory.annotation.Autowired;
