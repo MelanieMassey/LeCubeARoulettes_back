@@ -1,5 +1,6 @@
 package com.lecubearoulettes.controller;
 
+import com.lecubearoulettes.entity.Address;
 import com.lecubearoulettes.entity.RoleEntity;
 import com.lecubearoulettes.entity.UserEntity;
 import com.lecubearoulettes.entity.dto.AuthResponseDto;
@@ -70,9 +71,24 @@ public class AuthController {
             return new ResponseEntity<>("Username is taken!", HttpStatus.BAD_REQUEST);
         }
 
+        Address address = new Address();
+        address.setStreetNumber(registerDto.getStreetNumber());
+        address.setStreetType(registerDto.getStreetType());
+        address.setStreetName(registerDto.getStreetName());
+        address.setAddressMoreInfo(registerDto.getAddressMoreInfo());
+        address.setZipCode(registerDto.getZipCode());
+        address.setCity(registerDto.getCity());
+
         UserEntity user = new UserEntity();
+        user.setFirstName(registerDto.getFirstname());
+        user.setLastName(registerDto.getLastname());
+        user.setTitle(registerDto.getTitle());
         user.setEmail(registerDto.getEmail());
+        user.setPhone(registerDto.getPhone());
+        user.setBirthdate(registerDto.getBirthdate());
         user.setPassword(passwordEncoder.encode((registerDto.getPassword())));
+
+        user.setAddress(address);
 
         RoleEntity roles = roleRepository.findByRolename("USER").get();
         user.setRoles(Collections.singletonList(roles));

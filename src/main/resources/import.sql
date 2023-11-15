@@ -22,4 +22,6 @@
 --INSERT INTO `lecar_db`.`attendee` (`id`, `first_name`, `last_name`, `gender`,`birthdate`) VALUES (13, 'Lily', 'Depp', 'female', '2015-03-05');
 --INSERT INTO `lecar_db`.`attendee` (`id`, `first_name`, `last_name`, `gender`,`birthdate`) VALUES (14, 'Agathe', 'Lavigne', 'female', '2018-09-05');
 --
---INSERT INTO `roles` (`id`, `name`) VALUES ('1', 'ADMIN'), ('2', 'USER');
+--INSERT INTO `lecar_db`.`roles` (`id`, `rolename`) VALUES ('1', 'ADMIN'), ('2', 'USER');
+
+INSERT INTO `roles` (`id`, `rolename`) VALUES (1, 'ADMIN'), (2, 'USER');

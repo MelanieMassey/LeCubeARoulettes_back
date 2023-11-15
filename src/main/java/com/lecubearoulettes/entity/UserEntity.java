@@ -22,33 +22,33 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(
-            nullable = false
-    )
+//    @Column(
+//            nullable = false
+//    )
     private String firstName;
 
-    @Column(
-            nullable = false
-    )
+//    @Column(
+//            nullable = false
+//    )
     private String lastName;
 
     @Enumerated(EnumType.STRING)
     private Title title;
 
-    @Column(
-            nullable = false
-    )
+//    @Column(
+//            nullable = false
+//    )
     private String email;
 
-    @Column(
-            nullable = false
-    )
+//    @Column(
+//            nullable = false
+//    )
     private String phone;
 
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate birthdate;
 
-    @Embedded
+//    @Embedded
     private Address address;
 
     @JsonIgnore
