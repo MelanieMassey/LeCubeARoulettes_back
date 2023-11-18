@@ -1,6 +1,5 @@
 package com.lecubearoulettes.controller;
 
-import com.lecubearoulettes.entity.Address;
 import com.lecubearoulettes.entity.RoleEntity;
 import com.lecubearoulettes.entity.UserEntity;
 import com.lecubearoulettes.entity.dto.AuthResponseDto;
@@ -25,11 +24,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/auth")
-@RequiredArgsConstructor
 public class AuthController {
 
 
@@ -71,14 +70,6 @@ public class AuthController {
             return new ResponseEntity<>("Username is taken!", HttpStatus.BAD_REQUEST);
         }
 
-        Address address = new Address();
-        address.setStreetNumber(registerDto.getStreetNumber());
-        address.setStreetType(registerDto.getStreetType());
-        address.setStreetName(registerDto.getStreetName());
-        address.setAddressMoreInfo(registerDto.getAddressMoreInfo());
-        address.setZipCode(registerDto.getZipCode());
-        address.setCity(registerDto.getCity());
-
         UserEntity user = new UserEntity();
         user.setFirstName(registerDto.getFirstname());
         user.setLastName(registerDto.getLastname());
@@ -86,13 +77,15 @@ public class AuthController {
         user.setEmail(registerDto.getEmail());
         user.setPhone(registerDto.getPhone());
         user.setBirthdate(registerDto.getBirthdate());
+        user.setStreetNumber(registerDto.getStreetNumber());
+        user.setStreetName(registerDto.getStreetName());
+        user.setZipCode(registerDto.getZipCode());
+        user.setCity(registerDto.getCity());
         user.setPassword(passwordEncoder.encode((registerDto.getPassword())));
-
-        user.setAddress(address);
+        userRepository.save(user);
 
         RoleEntity roles = roleRepository.findByRolename("USER").get();
-        user.setRoles(Collections.singletonList(roles));
-
+        user.getRoles().add(roles);
         userRepository.save(user);
 
         return new ResponseEntity<>("User registered success!", HttpStatus.OK);

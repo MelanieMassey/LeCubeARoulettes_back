@@ -10,11 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
+@Builder
 @Table(name = "users")
 public class UserEntity {
 
@@ -45,15 +44,18 @@ public class UserEntity {
 //    )
     private String phone;
 
+    private Integer streetNumber;
+    private String streetName;
+    private String zipCode;
+    private String city;
+
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate birthdate;
-
-//    @Embedded
-    private Address address;
 
     @JsonIgnore
     private String password;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
