@@ -19,16 +19,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin("${front.url}")
 public class AuthController {
 
 
@@ -47,8 +45,8 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
         this.jwtGenerator = jwtGenerator;
     }
-//
-    @PostMapping("login")
+
+    @PostMapping("/login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto){
 
         Authentication authentication = authenticationManager.authenticate(
@@ -63,7 +61,7 @@ public class AuthController {
     }
 //
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
 
         if (userRepository.existsByEmail(registerDto.getEmail())) {
@@ -71,8 +69,8 @@ public class AuthController {
         }
 
         UserEntity user = new UserEntity();
-        user.setFirstName(registerDto.getFirstname());
-        user.setLastName(registerDto.getLastname());
+        user.setFirstName(registerDto.getFirstName());
+        user.setLastName(registerDto.getLastName());
         user.setTitle(registerDto.getTitle());
         user.setEmail(registerDto.getEmail());
         user.setPhone(registerDto.getPhone());

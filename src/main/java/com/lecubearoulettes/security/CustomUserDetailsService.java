@@ -22,7 +22,7 @@ public class CustomUserDetailsService  implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
+    @Autowired
     public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
