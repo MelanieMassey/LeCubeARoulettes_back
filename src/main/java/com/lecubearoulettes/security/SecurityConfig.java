@@ -35,6 +35,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
                 .csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(authEntryPoint)
@@ -44,8 +46,8 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/dashboard/user").hasAuthority("USER")
-//                .antMatchers("/api/public/**").permitAll()
+                .antMatchers("/api/events/**").permitAll()
+                .antMatchers("/api/dashboard/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();

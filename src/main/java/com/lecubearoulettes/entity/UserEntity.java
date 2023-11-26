@@ -3,6 +3,8 @@ package com.lecubearoulettes.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -61,5 +63,17 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<RoleEntity> roles = new ArrayList<>();
 
+    @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany
+    @JoinTable(name = "users_events", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"))
+    private List<EventEntity> events = new ArrayList<>();
 
+    @JsonIgnore
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_attendees", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "attendee_id", referencedColumnName = "id"))
+    private List<Attendee> attendees = new ArrayList<>();
 }

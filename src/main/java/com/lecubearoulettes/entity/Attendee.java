@@ -1,14 +1,26 @@
 package com.lecubearoulettes.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.apache.catalina.User;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Builder
+@Table(name = "attendees")
 public class Attendee {
 
     @Id
@@ -16,53 +28,18 @@ public class Attendee {
     private Long id;
     private String firstName;
     private String lastName;
-    private String gender;
+//    private String gender;
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate birthdate;
 
-    public Attendee() {
-    }
+    @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany
+    @JoinTable(name = "attendees_events", joinColumns = @JoinColumn(name = "attendee_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"))
+    private List<EventEntity> events = new ArrayList<>();
 
-
-
-    // GETTERS & SETTERS
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
-    }
+    @JsonIgnore
+    @ManyToMany(mappedBy = "attendees")
+    private List<UserEntity> users;
 }

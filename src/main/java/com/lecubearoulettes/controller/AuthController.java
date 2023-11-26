@@ -1,10 +1,12 @@
 package com.lecubearoulettes.controller;
 
+import com.lecubearoulettes.entity.EventEntity;
 import com.lecubearoulettes.entity.RoleEntity;
 import com.lecubearoulettes.entity.UserEntity;
 import com.lecubearoulettes.entity.dto.AuthResponseDto;
 import com.lecubearoulettes.entity.dto.LoginDto;
 import com.lecubearoulettes.entity.dto.RegisterDto;
+import com.lecubearoulettes.repository.EventRepository;
 import com.lecubearoulettes.repository.RoleRepository;
 import com.lecubearoulettes.repository.UserRepository;
 //import com.lecubearoulettes.security.JWTGenerator;
@@ -21,8 +23,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.relation.Role;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -33,6 +37,7 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+    private EventRepository eventRepository;
     private PasswordEncoder passwordEncoder;
     private JWTGenerator jwtGenerator;
 //
@@ -55,9 +60,15 @@ public class AuthController {
                         loginDto.getPassword()));
         // Stockage de notre objet authentication dans le context
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        // Récupère le user
+        UserEntity user = userRepository.findByEmail(loginDto.getEmail()).get();
+        // Récupère les roles du user
+        List<RoleEntity> roles = user.getRoles();
+        // Récupère les events réservés par le user
+//        List<EventEntity> events = eventRepository.
         // Génère le token
         String token = jwtGenerator.generateToken(authentication);
-        return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);
+        return new ResponseEntity<>(new AuthResponseDto(user, roles, token), HttpStatus.OK);
     }
 //
 
